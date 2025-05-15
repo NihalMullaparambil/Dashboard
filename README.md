@@ -1,4 +1,40 @@
-# Energy_dashboard
+# Energy Dashboard
+
+A Python-based web dashboard for monitoring and analyzing energy consumption, featuring real-time data visualization and API integration. Built with Anvil's Uplink technology for distributed architecture.
+
+![Dashboard Login Screen](./screenshots/Login.png)
+
+## Features
+- Real-time energy consumption monitoring
+- Interactive Plotly visualizations with time range selectors
+- Secure JWT authentication flow
+- Modular frontend components (Mapbox integration, status cards)
+- Sankey diagrams for energy flow visualization
+- Automatic data caching with timeout (3000 minutes)
+- Multi-project support with user-specific data
+
+## Project Structure
+```plaintext```
+Energy_Dashboard/
+├── client_code/               # Anvil-powered frontend components
+│   ├── battery_energy_system/ # Battery performance analytics
+│   ├── custom_components/     # Reusable UI widgets
+│   │   ├── bar_dis_plot/      # Interactive charts
+│   │   └── mapbox/            # Geographic visualization
+│   └── project_selection/     # Multi-project switching
+├── server_code/               # Backend logic (not used - see functions.py)
+└── theme/                     # CSS/styles and static assets
+
+
+
+
+[External API] <--HTTPS--> [functions.py] <--Anvil Uplink--> [Anvil Web Client]
+  (Folivora Energy)         (Python Backend)  (WebSockets)     (Browser UI)
+
+
+
+
+
 
 
 
