@@ -1,0 +1,63 @@
+allow_embedding: false
+db_schema:
+  project_param:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: projectCategoryName
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: measurandColourScheme
+      type: simpleObject
+    server: full
+    title: project_param
+  projectdata:
+    client: none
+    columns:
+    - admin_ui: {order: 7, width: 200}
+      name: access_token
+      type: string
+    - admin_ui: {order: 8, width: 200}
+      name: data
+      type: simpleObject
+    - admin_ui: {order: -1, width: 200}
+      name: timeStamp
+      type: datetime
+    - admin_ui: {order: 9, width: 200}
+      name: projectId
+      type: number
+    - admin_ui: {order: 10, width: 200}
+      name: userId
+      type: number
+    - admin_ui: {order: 11, width: 200}
+      name: measurands_list
+      type: simpleObject
+    - admin_ui: {order: 12, width: 200}
+      name: production
+      type: simpleObject
+    server: full
+    title: projectdata
+dependencies: []
+name: Folivora
+native_deps:
+  head_html: |-
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
+package_name: Folivora
+renamed: true
+runtime_options:
+  client_version: '3'
+  legacy_features: {__dict__: true, bootstrap3: true, class_names: true, root_container: true}
+  server_spec: {base: python310-minimal}
+  server_version: python3-sandbox
+  version: 3
+services:
+- client_config: {}
+  server_config: {}
+  source: /runtime/services/tables.yml
+- client_config: {}
+  server_config: {file_table: files}
+  source: /runtime/services/anvil/files.yml
+startup: {module: signin, type: form}
+startup_form: null
+uplink_visible: true

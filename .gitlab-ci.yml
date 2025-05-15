@@ -1,0 +1,56 @@
+variables:
+  IMAGE_NAME: registry.git.rwth-aachen.de/franke/folivora_dashboard
+
+stages:
+  - build_anvil
+  - build_uplink
+  - deploy_anvil
+  - deploy_uplink
+
+build_image_anvil:
+  stage: build_anvil
+  image: docker:latest
+  services:
+    - docker:dind
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+  before_script:
+    - docker login -u $REGISTRY_USER -p $REGISTRY_TOKEN registry.git.rwth-aachen.de
+  script:
+    - docker build --platform linux/amd64 -t $IMAGE_NAME -f Dockerfile_Anvil .
+    - docker tag $IMAGE_NAME $IMAGE_NAME:anvil
+    - docker push $IMAGE_NAME:anvil
+
+build_image_uplink:
+  stage: build_uplink
+  image: docker:latest
+  services:
+    - docker:dind
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+  before_script:
+    - docker login -u $REGISTRY_USER -p $REGISTRY_TOKEN registry.git.rwth-aachen.de
+  script:
+    - docker build --platform linux/amd64 -t $IMAGE_NAME -f Dockerfile_Uplink .
+    - docker tag $IMAGE_NAME $IMAGE_NAME:uplink
+    - docker push $IMAGE_NAME:uplink
+
+deploy_anvil:
+  stage: deploy_anvil
+  before_script:
+    - chmod 400 $SSH_KEY
+  script:
+    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY ubuntu@$SERVER_ADDRESS "
+      sudo docker login -u $REGISTRY_USER -p $REGISTRY_TOKEN registry.git.rwth-aachen.de &&
+      sudo docker stop dashboard | xargs sudo docker rm &&
+      sudo docker run -d --network nginxproxymanager_default --name dashboard $IMAGE_NAME:anvil"
+
+deploy_uplink:
+  stage: deploy_uplink
+  before_script:
+    - chmod 400 $SSH_KEY
+  script:
+    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY ubuntu@$SERVER_ADDRESS "
+      sudo docker login -u $REGISTRY_USER -p $REGISTRY_TOKEN registry.git.rwth-aachen.de &&
+      sudo docker stop uplink_dashboard | xargs sudo docker rm &&
+      sudo docker run -d --network nginxproxymanager_default --name uplink_dashboard $IMAGE_NAME:uplink"      

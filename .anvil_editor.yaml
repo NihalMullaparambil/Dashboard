@@ -1,0 +1,30 @@
+unique_ids:
+  assets:
+    standard-page.html: 36MS64PT63YUEFJOLI3SLRRMOWDTX7IS
+    theme.css: II4TIFZAURJBJTYHFBID7VDRH37X6LPH
+  forms:
+    battery_energy_system: '1701326750914138203597291.20367'
+    comparisons: '1696071442717549540888617.1438'
+    consumer: '1706534339665444775161434.66846'
+    custom_components.bar_dis_plot: '1706551419377445853488706.6685'
+    custom_components.date_picker: '1707326968789902563902196.8424'
+    custom_components.mapbox: '1710160700961286928717714.863'
+    custom_components.status_card_full: '1706534722484619290251557.9326'
+    custom_components.status_card_full_copy: '1729259393028393605432665.91'
+    custom_components.status_card_half: '1706549966952886097797029.9384'
+    efficiency: '1696074203565647012855329.7662'
+    homepage: '1693254528905714453944304.345'
+    homepage_PV: '1697655518791162529882640.08472'
+    measurands: '1683015634774279081884385.4945'
+    project_selection: '1692564797065630493555408.4854'
+    project_selection.RowTemplate2: '1692565156536433153497125.407'
+    project_selection_backup: Z7GFWPO7OHWAGOBYHEP5YUS26KGUAJHV
+    signin: VEB6HDGKHL5HEWPSCGWYRLJSEAXHSYDX
+    signin_backup: '1683205561399817613744228.1206'
+    update_signin: '1693233279878378728117392.5845'
+    update_signin2: '1683019725524390216400795.0395'
+  modules:
+    Global: '1683624880937443352100056.7806'
+    custom_components: '1706520539386912624747970.4597'
+  scripts: {}
+  server_modules: {}

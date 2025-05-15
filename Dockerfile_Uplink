@@ -1,0 +1,15 @@
+FROM python:3.9
+
+# install python packages
+RUN pip install anvil-app-server
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
+
+VOLUME /apps
+WORKDIR /apps
+
+# copy uplinkscript
+COPY functions.py ./
+RUN chmod a+x functions.py
+
+CMD [ "python", "./functions.py"]

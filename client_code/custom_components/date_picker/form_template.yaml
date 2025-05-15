@@ -1,0 +1,35 @@
+components:
+- data_bindings:
+  - {code: 'self.item[''date'']', property: date, writeback: true}
+  - {code: 'self.item[''from_max_date'']', property: max_date, writeback: false}
+  event_bindings: {change: date_picker_from_change}
+  layout_properties: {grid_position: 'IXCVAJ,LBOIXZ'}
+  name: date_picker_from
+  properties: {max_date: 11/12/2023, min_date: '', placeholder: From}
+  type: DatePicker
+- components:
+  - data_bindings:
+    - {code: 'self.item[''date'']', property: date, writeback: true}
+    - {code: 'self.item[''to_max_date'']', property: max_date, writeback: false}
+    - {code: 'self.item[''to_min_date'']', property: min_date, writeback: false}
+    event_bindings: {change: date_picker_1_change}
+    name: date_picker_to
+    properties: {placeholder: TO}
+    type: DatePicker
+  layout_properties: {grid_position: 'IXCVAJ,CHSZTW'}
+  name: linear_panel_1
+  properties: {}
+  type: LinearPanel
+- event_bindings: {click: button_1_click}
+  layout_properties: {grid_position: 'IXCVAJ,EXSZZF'}
+  name: button_1
+  properties: {text: Generate}
+  type: Button
+container:
+  properties: {col_widths: '{"CHSZTW":20,"EXSZZF":20}'}
+  type: ColumnPanel
+custom_component: true
+events:
+- {default_event: true, name: button_click}
+is_package: true
+properties: []
