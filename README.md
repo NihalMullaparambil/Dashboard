@@ -14,7 +14,7 @@ A Python-based web dashboard for monitoring and analyzing energy consumption, fe
 - Multi-project support with user-specific data
 
 ## Project Structure
-```plaintext```
+```plaintext
 Energy_Dashboard/
 ├── client_code/               # Anvil-powered frontend components
 │   ├── battery_energy_system/ # Battery performance analytics
@@ -24,6 +24,7 @@ Energy_Dashboard/
 │   └── project_selection/     # Multi-project switching
 ├── server_code/               # Backend logic (not used - see functions.py)
 └── theme/                     # CSS/styles and static assets
+```
 
 
 
