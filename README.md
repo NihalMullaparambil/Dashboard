@@ -26,7 +26,6 @@ Energy_Dashboard/
 │   │   ├── bar_dis_plot/      # Interactive charts
 │   │   └── mapbox/            # Geographic visualization
 │   └── project_selection/     # Multi-project switching
-├── server_code/               # Backend logic (not used - see functions.py)
 ├── theme/                     # CSS/styles and static assets
 └── function.py                # Run on a separate machine, protects sensitive operations
 ```
