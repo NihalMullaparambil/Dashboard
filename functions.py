@@ -44,7 +44,7 @@ url = 'https://something'
 # use username and password to get all important info about the respective user
 @anvil.server.callable
 def getUserData(username,password):
-  api_url = 'https://api.folivoraenergy.com/api/customers/login'
+  api_url = 'https://api.test_energy.com/api/customers/login'
   login = {
 
    "email": username,
@@ -86,7 +86,7 @@ def Initial_Number_of_points(token, measurand_list):
   if DEBUG:
         print("\n\t Initial_Number_of_points ")
   number_of_points = 0
-  api_url = f'https://api.folivoraenergy.com/api/listmeasurands'
+  api_url = f'https://api.test_energy.com/api/listmeasurands'
   string_access_key = 'Bearer ' + token
   headers = {"Authorization": string_access_key}
   ds = ''
@@ -146,7 +146,7 @@ def doInitialDataFetch(token, projectid, measurands_list, userid):
 def getProjectData(token,projectid,number_of_points):
   if DEBUG:
       print('\n\t getProjectData')
-  api_url = f'https://api.folivoraenergy.com/api/getprojectdata?id={projectid}&limit={number_of_points}'
+  api_url = f'https://api.test_energy.com/api/getprojectdata?id={projectid}&limit={number_of_points}'
   string_access_key = 'Bearer ' + token
   headers = {"Authorization": string_access_key}
   ds = ''
@@ -632,7 +632,7 @@ def getMeasurandsIds(username,password,projectname):
 
 @anvil.server.callable
 def getMeasurandsInfo(username, password, projectname, token):
-  api_url = f'https://api.folivoraenergy.com/api/listmeasurands'
+  api_url = f'https://api.test_energy.com/api/listmeasurands'
   string_access_key = 'Bearer ' + token
   headers = {"Authorization": string_access_key}
   ds = ''
@@ -765,7 +765,7 @@ def getMeasurands(username, password, projectname, token):
         for j in i:
             measurands_list.append(str(j))
     # http request list measurands
-    api_url = f'https://api.folivoraenergy.com/api/listmeasurands'
+    api_url = f'https://api.test_energy.com/api/listmeasurands'
     string_access_key = 'Bearer ' + token
     headers = {"Authorization": string_access_key}
     ds = ''
