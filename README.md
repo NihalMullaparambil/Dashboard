@@ -1,4 +1,4 @@
-# Energy Dashboard
+# Energy DashBoard
 
 > **NOTE**: This repository contains a redacted version of the project due to copyright restrictions and compliance requirements. Sensitive API implementations and proprietary visualization components have been removed.
 
