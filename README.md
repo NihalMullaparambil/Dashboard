@@ -1,6 +1,31 @@
 # Energy DashBoard
 
 > **NOTE**: This repository contains a redacted version of the project due to copyright restrictions and compliance requirements. Sensitive API implementations and proprietary visualization components have been removed.
+>
+> ## ❓ What Problem Does This Project Solve?
+
+Modern energy systems are growing **more complex, data-rich, and cost-sensitive** every year.  
+Plant operators and portfolio managers face three core pain points:
+
+| Problem  | What it means for the team | Why today’s tools don’t help |
+|-----------------------|---------------------------|------------------------------|
+| **Too many separate tools** – the dashboard that shows the numbers isn’t connected to the machines that do the work. | Operators have to copy-and-paste settings from one screen to another, which is slow and error-prone. | Dashboards can only *display* data; the plant’s auto-pilot (its industrial controller) keeps running on fixed “if-this-then-that” rules and never adapts. |
+| **Prices and rules change constantly** – energy costs have soared and regulations multiply every year. | Staff must tweak the system almost daily to avoid high bills or compliance fines. | The controller ignores outside signals like market prices, weather forecasts, or CO₂ limits; it just follows yesterday’s schedule. |
+| **Not enough insight or expertise** – most users want to save energy but don’t know where to start. | Decisions are made on gut feeling, and it’s hard to prove whether upgrades pay off. | Plenty of raw data exists, but it isn’t turned into clear, real-time benchmarks anyone can act on. |
+
+
+### Our Solution — **SlothBrAIn + PV Dashboard**
+
+1. **Unify data & control**  
+   *Edge device* **SlothBox** streams sensor, weather, and market data into a single backend; **SlothBrAIn** then calculates *optimal set-points* every 15–60 min and pushes them back to the plant controllers via standard protocols.
+
+2. **Predict & optimise, not just visualise**  
+   Hybrid AI models forecast production/consumption; mathematical optimisation derives cost- or CO₂-minimal schedules. Operators see both the *recommendation* and the *expected savings* inside the dashboard.
+
+3. **Close the loop autonomously**  
+   Approved strategies are executed automatically, turning the dashboard from a passive monitor into an **active energy operating system** that can cut consumption by **15–20 %** in typical deployments.
+
+In short, this project bridges the historic gap between **energy information systems** and **hardware control**, giving stakeholders a single pane of glass that *explains* their energy flows *and* acts on them for measurable economic and environmental gains.
 
 A Python-based web dashboard for monitoring and analyzing energy consumption, featuring real-time data visualization and API integration. Built with Anvil's Uplink technology for distributed architecture.
 
