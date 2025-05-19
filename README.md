@@ -25,7 +25,7 @@ Plant operators and portfolio managers face three core pain points:
    Approved strategies are executed automatically, turning the dashboard from a passive monitor into an **active energy operating system** that can cut consumption by **15–20 %** in typical deployments.
 
 In short, this project bridges the historic gap between **energy information systems** and **hardware control**, giving stakeholders a single pane of glass that *explains* their energy flows *and* acts on them for measurable economic and environmental gains.
-For an example of my analytical approach, please refer to the section where I designed and implemented the smart login system with prefetch workflows [Sign-In → Smart Prefetch](#How the *Sign-In → Smart Prefetch* flow works).
+For an example of my analytical approach, please refer to the section where I designed and implemented the smart login system with prefetch workflows [#How the *Sign-In → Smart Prefetch* flow works](https://github.com/NihalMullaparambil/Dashboard/tree/main#how-the-sign-in--smart-prefetch-flow-works).
 
 ## Features
 - Real-time energy consumption monitoring
