@@ -58,6 +58,73 @@ A Python-based web dashboard for monitoring and analyzing energy consumption, fe
 ## How the *Sign-In → Smart Prefetch* flow works    
 ![Dashboard Login Screen](./screenshots/Login.png)
 
+<details>
+<summary><strong>1 · getUserData() – authenticate & purge stale cache</strong></summary>
+
+```python
+# functions.py  (lines 10–45)
+
+@anvil.server.callable
+def getUserData(username, password):
+    api_url = "https://api.test_energy.com/api/customers/login"
+    login   = {"email": username, "password": password}
+
+    while True:  # retry with back-off on network hiccup
+        try:
+            resp = requests.post(api_url, json=login)
+            break
+        except requests.exceptions.ConnectionError:
+            time.sleep(5)
+
+    if resp.status_code == 400:
+        raise Exception("Wrong user name or password")
+
+    clearProjectTimeOutData()     # 🧹 clean stale cache rows
+    return resp.json()
+```
+</details> 
+<details> <summary><strong>2 · Initial_Number_of_points() – figure out exactly how many rows cover 48 h</strong></summary>
+  
+```python
+# functions.py  (lines 70–99)
+
+def Initial_Number_of_points(token, measurand_list):
+    headers = {"Authorization": f"Bearer {token}"}
+    resp    = requests.get("https://api.test_energy.com/api/listmeasurands",
+                           headers=headers).json()
+    df      = pd.json_normalize(resp, max_level=1)
+
+    return sum(
+        int(48*60*60 / df.loc[df.measurandId == int(mid), "resolution"].iloc[0])
+        for mid in measurand_list
+    )
+```
+</details> 
+<details> <summary><strong>3 · doInitialDataFetch() – prime the 48 h cache if needed</strong></summary>
+
+```python
+# functions.py  (lines 120–155)
+
+@anvil.server.callable
+def doInitialDataFetch(token, projectid, measurands_list, userid):
+    if checkIfDataAlreadyExsist(projectid, userid):
+        return 1                      # ✅ cache hit
+
+    n_points = Initial_Number_of_points(token, measurands_list)
+    df       = dfto48hdata(getProjectData(token, projectid, n_points))
+
+    app_tables.projectdata.add_row(
+        timeStamp       = pd.Timestamp.now(),
+        projectId       = projectid,
+        userId          = userid,
+        measurands_list = measurands_list,
+        access_token    = token,
+        data            = df.to_json()
+    )
+    return 1
+```
+</details>
+
 ### Sign in → fetch *only* what matters
 | Step | What the code does | Why it’s analytical |
 |------|-------------------|---------------------|
