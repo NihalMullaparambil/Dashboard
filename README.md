@@ -32,10 +32,8 @@ Energy_Dashboard/
 
 
 ## Architecture
-```plaintext
-[External API] <--HTTPS--> [functions.py] <--Anvil Uplink--> [Anvil Web Client]
-(Energy Database)         (Python Backend)  (WebSockets)     (Browser UI)
-```
+![Architecture](./screenshots/Architecture.png)
+
 
 
 ### Backend Implementation
