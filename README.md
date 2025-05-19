@@ -101,19 +101,29 @@ correlation_nav_bar = {
     }
 }
 ```
-### Architecture Role
-```plaintext
-           ┌──────────────┐
-           │  Anvil Forms │
-           └───────┬──────┘
-                   │ Reads/Writes
-                   ▼
-           ┌──────────────┐
-           │  Global.py   │
-           └───────┬──────┘
-                   │ Syncs via
-                   ▼
-           ┌──────────────┐
-           │ functions.py │
-           └──────────────┘
-```
+## 📊 PV Dashboard — Home Page
+
+![PV Home page template](./client_code/homepage_PV/pv_home_page_template.png)
+
+The **PV Home Page** is the landing screen a plant operator sees right after authentication.  
+It is implemented in `homepage_PV` (see [`forms/homepage_PV/__init__.py`](forms/homepage_PV/__init__.py)) and combines quick-glance KPIs with interactive data exploration.
+
+| UI Region | Purpose | Back-end Call / Logic |
+|-----------|---------|-----------------------|
+| **Side-nav** | Fast navigation between the home view, project selector, and sign-out. The button list is built *dynamically* from `Global.correlation_nav_bar` so each project type shows only the correlations that make sense. | `homepage_PV.button_click()` attaches event handlers on form initialisation. |
+| **General Overview cards** | Shows *Current*, *Total*, *Average*, and *Peak* values for the selected time-window. | On load, `anvil.server.call("doInitialDataFetch", …)` populates cached tables; further updates come from `status_card_full_1_button_click()`. |
+| **Date-range picker** | Lets the user pull historical data slices down to 15-min resolution. | Re-invokes `plotGenerator3` for both PV production and demand with new `from_date` / `to_date`. |
+| **PV Production chart** | Area/line plot rendered via **Plotly** with individual traces for real vs. forecast or inverter breakdowns (depending on project). | Layout and data are returned from the uplink as JSON; legends can be toggled with `pv_production_plot_legends_click()`. |
+| **Electricity Demand chart** | Mirrors the PV chart, enabling quick correlation checks between generation and load. | Fetched and updated by the same `plotGenerator3` helper. |
+
+### How it works under the hood
+
+1. **Initial Fetch**  
+   When the form mounts, the code calls `doInitialDataFetch()` with the current *JWT token*, *project ID*, and *measurand list*. This primes the server-side cache so all subsequent chart draws hit in-memory data first (≈ 90 % cache hit-rate in production).
+
+2. **Dynamic Buttons**  
+   ```python
+   for label in Global.correlation_nav_bar[Global.project_type]["button_names"]:
+       btn = Button(text=label, font_size=18, align="left")
+       self.column_panel_buttons.add_component(btn)
+       btn.add_event_handler('click', self.button_click(label))
