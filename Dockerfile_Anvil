@@ -33,5 +33,5 @@ USER anvil
 
 EXPOSE 3030
 
-ENTRYPOINT ["anvil-app-server", "--data-dir", "/anvil-data", "--origin", "https://dashboard.folivoraenergy.com", "--port", "3030", "--disable-tls", "--uplink-key", "uplinkkey_folivora"]
+ENTRYPOINT ["anvil-app-server", "--data-dir", "/anvil-data", "--origin", "https://dashboard.test.com", "--port", "3030", "--disable-tls", "--uplink-key", "key"]
 CMD ["--app", "CustomAppName"]

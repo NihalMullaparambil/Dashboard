@@ -29,7 +29,7 @@ USER anvil
 
 EXPOSE 3030
 
-ENTRYPOINT ["anvil-app-server", "--data-dir", "/anvil-data", "--origin", "https://dashboard.folivoraenergy.com", "--port", "3030", "--disable-tls", "--uplink-key", "server_E2AOUAC6U2ER5U47Y75ALWCO-ZMUP2XV7DAMOLD3F"]
+ENTRYPOINT ["anvil-app-server", "--data-dir", "/anvil-data", "--origin", "https://dashboard.test.com", "--port", "3030", "--disable-tls", "--uplink-key", "key"]
 CMD ["--app", "CustomAppName"]
 
 # start uplink script
